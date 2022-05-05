@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 8080;
+const port = 4200;
 // const db = require('./models/db');
 const Usuario = require("./models/Usuario");
 
@@ -9,13 +9,15 @@ app.use(express.json());
 app.get("/users", async (req, res) => {
   await Usuario.findAsync()
     .then((users) => {
-      return res.status(200).json({
+      return res.json({
         users,
       });
     }).catch((err) => {
-        return res.status(404).json({
-        erro: true,
-        mensagem:"Erro: Usuário não cadastrado com sucesso Status 404 not found!",
+      
+        return res.status(400).json({
+            erro: true,
+            mensagem:"Erro: Usuário não cadastrado com sucesso Status 404 not found!"
+          });
 
     });
 });
