@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 8088
+const port = 8080
 // const db = require('./models/db');
 const Usuario = require('./models/Usuario');
 
@@ -37,12 +37,12 @@ app.post("/users", async (req, res) => {
     then(() => {
         return res.status(200).json({
             erro: false,
-            mensagem: "Usuário cadastrado com sucesso!"
+            mensagem: "Usuário cadastrado com sucesso Status 200 OK!"
         });
     }).catch(() => {
         return res.status(400).json({
             erro: true,
-            mensagem: "Erro: Usuário não cadastrado com sucesso!"
+            mensagem: "Erro: Usuário não cadastrado com sucesso Status 404 not found!"
         });
     });    
 });
