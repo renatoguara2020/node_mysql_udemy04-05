@@ -15,7 +15,7 @@ app.get("/users", async (req, res) => {
             users
         });
     }).catch((error) => {
-        return res.status(400).json({
+        return res.status(404).json({
             erro: true,
             mensagem: "Erro: Nenhum usuário encontrado!", error
         });
@@ -32,11 +32,11 @@ app.get("/users/:id",async (req, res) => {
         users: users,
     });
 
-    }).catch(()=>{
+    }).catch((error)=>{
      
       return res.status(400).json({
         erro: true,
-        mensagem: "Erro: Usuário não cadastrado com sucesso!"
+        mensagem: "Erro: Usuário não cadastrado com sucesso!",error
     });
 
     })

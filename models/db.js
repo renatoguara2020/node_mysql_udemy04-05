@@ -7,11 +7,11 @@ const sequelize = new Sequelize("my_db_celke", "root", "", {
 
 sequelize
   .authenticate()
-  .then(function () {
-    console.log("Conexão realizado com Sucesso ao Postgres SQL !!!!!");
+  .then( ()=> {
+    console.log("Conexão realizado com Sucesso ao banco de dados SQL !!!!!");
   })
-  .catch(function (error) {
-    console.log("Não foi possível conectar ao banco de dados PostGreSQL", error);
+  .catch( (error)=> {
+    console.log("Não foi possível conectar ao banco de dados", error);
   });
    //sequelize.sync({ force: true });
 module.exports = sequelize;
