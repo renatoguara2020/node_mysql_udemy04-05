@@ -13,5 +13,5 @@ sequelize
   .catch(function (error) {
     console.log("Não foi possível conectar ao banco de dados PostGreSQL", error);
   });
-  // sequelize.sync({ force: true });
+   //sequelize.sync({ force: true });
 module.exports = sequelize;

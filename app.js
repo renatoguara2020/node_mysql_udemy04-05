@@ -88,7 +88,7 @@ app.delete("/user/:id",async (req, res) => {
         mensagem: "Usuário Deletado com sucesso!"
     });
 
-    }).catch(()=>{
+    }).catch((error)=>{
   
       return res.status(400).json({
         erro: true,
