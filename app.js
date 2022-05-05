@@ -8,7 +8,7 @@ app.get("/users", async (req, res) => {
 
     await Usuario.findAll({
         attributes: ['id', 'name', 'email'], 
-        order: [['id', 'DESC']]})
+        order: [['id', 'ASC']]})
     .then((users) => {
         return res.json({
             erro: false,
@@ -32,7 +32,7 @@ app.get("/usuario/:id", (req, res) => {
     });
 });
 
-app.post("/user", async (req, res) => {
+app.post("/users", async (req, res) => {
     const { name, email } = req.body;   
 
     await Usuario.create(req.body)

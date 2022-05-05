@@ -4,9 +4,9 @@ const db = require("./db");
 const Usuario = db.define("users", {
   id: {
     type: Sequelize.INTEGER,
-    allowNull: false,
-    primaryKey: true,
     autoIncrement: true,
+    primaryKey: true,
+   
   },
 
   name: {
@@ -18,7 +18,7 @@ const Usuario = db.define("users", {
 
   email: {
     type: Sequelize.STRING,
-    unique: true,
+    allowNull: false,
     isEmail: true,
   },
 });

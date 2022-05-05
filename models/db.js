@@ -1,8 +1,8 @@
 const Sequelize = require("sequelize");
 
-const sequelize = new Sequelize("my_db_celke", "root", "", {
+const sequelize = new Sequelize("my_db_celke", "postgres", "456ALVES", {
   host: "localhost",
-  dialect: "mysql",
+  dialect: "postgres",
 });
 
 sequelize
@@ -13,5 +13,5 @@ sequelize
   .catch(function (error) {
     console.log("Não foi possível conectar ao banco de dados PostGreSQL", error);
   });
-  sequelize.sync({ force: true });
+  // sequelize.sync({ force: true });
 module.exports = sequelize;
