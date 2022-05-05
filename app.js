@@ -1,74 +1,72 @@
 const express = require("express");
+const Usuario = require('./models/Usuario');
 const app = express();
-const port = 4200;
-// const db = require('./models/db');
-const Usuario = require("./models/Usuario");
 
 app.use(express.json());
 
 app.get("/users", async (req, res) => {
-  await Usuario.findAsync()
+
+    await Usuario.findAll({
+        attributes: ['id', 'name', 'email'], 
+        order: [['id', 'DESC']]})
     .then((users) => {
-      return res.json({
-        users,
-      });
-    }).catch((err) => {
-      
+        return res.json({
+            erro: false,
+            users
+        });
+    }).catch(() => {
         return res.status(400).json({
             erro: true,
-            mensagem:"Erro: Usuário não cadastrado com sucesso Status 404 not found!"
-          });
-
-    });
+            mensagem: "Erro: Nenhum usuário encontrado!"
+        });
+    });    
 });
 
-// listar usuários
 app.get("/usuario/:id", (req, res) => {
-  const id1 = req.params.id;
-  const nome1 = req.body.nome;
-  const email1 = req.body.email;
-  return res.json({
-    erro: false,
-    id: id1,
-    nome: nome1,
-    nome: nome1,
-    email: email1,
-  });
-});
-
-//cadastrar usuário no banco de dados MySQL
-app.post("/users", async (req, res) => {
-  const { name, email } = req.body;
-
-  await Usuario.create(req.body)
-    .then(() => {
-      return res.status(200).json({
+    const { id } = req.params;
+    return res.json({
         erro: false,
-        mensagem: "Usuário cadastrado com sucesso Status 200 OK!",
-      });
-    })
-    .catch(() => {
-      return res.status(400).json({
-        erro: true,
-        mensagem:
-          "Erro: Usuário não cadastrado com sucesso Status 404 not found!",
-      });
+        id,
+        nome: "Cesar",
+        email: "cesar@celke.com.br"
     });
 });
-//Atualizar os registros no banco de dados
-app.put("/usuario/:id", (req, res) => {
-  const { id, nome, email } = req.body;
 
-  return res.json({ id: id, nome: nome, email: email });
+app.post("/user", async (req, res) => {
+    const { name, email } = req.body;   
+
+    await Usuario.create(req.body)
+    .then(() => {
+        return res.json({
+            erro: false,
+            mensagem: "Usuário cadastrado com sucesso!"
+        });
+    }).catch(() => {
+        return res.status(400).json({
+            erro: true,
+            mensagem: "Erro: Usuário não cadastrado com sucesso!"
+        });
+    });    
 });
 
-// Apagar um usuário no banco de dados
+app.put("/usuario", (req, res) => {
+    const { id, nome, email } = req.body;    
+    return res.json({
+        erro: false,
+        id,
+        nome,
+        email
+    });
+});
+
 app.delete("/usuario/:id", (req, res) => {
-  const { id } = req.params;
-
-  return res.json({ id: id });
+    const { id } = req.params;    
+    return res.json({
+        erro: false,
+        id
+    });
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+app.listen(8080, () => {
+    console.log("Servidor iniciado na porta 8080: http://localhost:8080");
 });
