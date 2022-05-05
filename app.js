@@ -83,11 +83,19 @@ app.delete("/user/:id",async (req, res) => {
     
     await Usuario.destroy({where: {id: req.params.id}}).then(()=>{
 
+      return res.json({
+        erro: false,
+        mensagem: "Usuário Deletado com sucesso!"
+    });
 
     }).catch(()=>{
+  
+      return res.status(400).json({
+        erro: true,
+        mensagem: "Erro: Usuário não deletado com sucesso!", error
+    });
 
-
-    })
+    });
 
     
 });
