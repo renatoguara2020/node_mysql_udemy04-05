@@ -1,8 +1,8 @@
 const Sequelize = require("sequelize");
 
-const sequelize = new Sequelize("my_db_celke", "postgres", "456ALVES", {
+const sequelize = new Sequelize("my_db_celke", "root", "", {
   host: "localhost",
-  dialect: "postgres",
+  dialect: "mysql",
 });
 
 sequelize

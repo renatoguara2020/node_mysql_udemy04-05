@@ -25,7 +25,8 @@ app.get("/users", async (req, res) => {
 app.get("/users/:id",async (req, res) => {
     const { id } = req.params;
 
-    await Usuario.findAll({ where: {id: id }}).then((users)=>{
+    // await Usuario.findAll({ where: {id: id }}).then((users)=>{
+      await Usuario.findByPk(id).then((users)=>{
       return res.json({
         erro: false,
         users: users,
