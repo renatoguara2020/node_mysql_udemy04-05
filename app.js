@@ -1,6 +1,7 @@
 const express = require("express");
 const User = require('./models/Usuario');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const app = express();
 
 app.use(express.json());
@@ -9,7 +10,7 @@ app.get("/users", async (req, res) => {
 
     await User.findAll({
         attributes: ['id', 'name', 'email', 'password'],
-        order: [['id', 'DESC']]
+        order: [['id', 'ASC']]
     })
         .then((users) => {
             return res.json({
