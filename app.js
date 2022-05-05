@@ -60,22 +60,36 @@ app.post("/users", async (req, res) => {
     });    
 });
 
-app.put("/usuario", (req, res) => {
-    const { id, nome, email } = req.body;    
-    return res.json({
+app.put("/users",async(req, res) => {
+    const { id } = req.body;  
+    await Usuario.update(req.body, {where:{id: id}}).then(()=>{
+
+      return res.json({
         erro: false,
-        id,
-        nome,
-        email
+        mensagem: "Usuário Atualizado com sucesso!"
     });
+    }).catch((error)=>{
+
+      return res.status(400).json({
+        erro: true,
+        mensagem: "Erro: Usuário não cadastrado com sucesso!", error
+    });
+    });  
+    
 });
 
-app.delete("/usuario/:id", (req, res) => {
-    const { id } = req.params;    
-    return res.json({
-        erro: false,
-        id
-    });
+app.delete("/user/:id",async (req, res) => {
+    const { id } = req.params;  
+    
+    await Usuario.destroy({where: {id: req.params.id}}).then(()=>{
+
+
+    }).catch(()=>{
+
+
+    })
+
+    
 });
 
 app.listen(8080, () => {
