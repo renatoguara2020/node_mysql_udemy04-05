@@ -7,7 +7,7 @@ app.use(express.json());
 app.get("/users", async (req, res) => {
 
     await Usuario.findAll({
-        attributes: ['id', 'name', 'email','createdAt', 'updatedAt'], 
+        attributes: ['id', 'name', 'email','createdAt', 'updatedAt', 'password'], 
         order: [['id', 'ASC']]})
     .then((users) => {
         return res.json({
