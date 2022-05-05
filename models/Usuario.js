@@ -30,5 +30,5 @@ const Usuario = db.define("users", {
   }
 });
 
-Usuario.sync({alter:true});
+//Usuario.sync({alter:true});
 module.exports = Usuario;
