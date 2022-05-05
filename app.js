@@ -7,29 +7,39 @@ app.use(express.json());
 app.get("/users", async (req, res) => {
 
     await Usuario.findAll({
-        attributes: ['id', 'name', 'email'], 
-        order: [['id', 'DESC']]})
+        attributes: ['id', 'name', 'email','createdAt', 'updatedAt'], 
+        order: [['id', 'ASC']]})
     .then((users) => {
         return res.json({
             erro: false,
             users
         });
-    }).catch(() => {
+    }).catch((error) => {
         return res.status(400).json({
             erro: true,
-            mensagem: "Erro: Nenhum usuário encontrado!"
+            mensagem: "Erro: Nenhum usuário encontrado!", error
         });
     });    
 });
 
-app.get("/usuario/:id", (req, res) => {
+app.get("/users/:id",async (req, res) => {
     const { id } = req.params;
-    return res.json({
+
+    await Usuario.findAll({ where: {id: id }}).then((users)=>{
+      return res.json({
         erro: false,
-        id,
-        nome: "Cesar",
-        email: "cesar@celke.com.br"
+        users: users,
     });
+
+    }).catch(()=>{
+     
+      return res.status(400).json({
+        erro: true,
+        mensagem: "Erro: Usuário não cadastrado com sucesso!"
+    });
+
+    })
+    
 });
 
 app.post("/users", async (req, res) => {
