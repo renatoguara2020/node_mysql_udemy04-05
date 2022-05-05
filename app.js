@@ -8,7 +8,7 @@ app.get("/users", async (req, res) => {
 
     await Usuario.findAll({
         attributes: ['id', 'name', 'email'], 
-        order: [['id', 'ASC']]})
+        order: [['id', 'DESC']]})
     .then((users) => {
         return res.json({
             erro: false,
